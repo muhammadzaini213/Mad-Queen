@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: ee9d2702159743a49bf678eebd7a62d0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6428645061429185038
+    second: invisible_wall_appear_0
+  - first:
+      213: 476129473101360345
+    second: invisible_wall_appear_1
+  - first:
+      213: 6812838964309266425
+    second: invisible_wall_appear_2
+  - first:
+      213: -2594497829037749249
+    second: invisible_wall_appear_3
+  - first:
+      213: -1208469220343597089
+    second: invisible_wall_appear_4
+  - first:
+      213: -7683797445767806183
+    second: invisible_wall_appear_5
+  - first:
+      213: -3733836372048787701
+    second: invisible_wall_appear_6
+  - first:
+      213: -8334661972381256698
+    second: invisible_wall_appear_7
+  - first:
+      213: -6747819920451462369
+    second: invisible_wall_appear_8
+  - first:
+      213: -266137951894338907
+    second: invisible_wall_appear_9
+  - first:
+      213: -6434197864846216449
+    second: invisible_wall_appear_10
+  - first:
+      213: -5861749783652086533
+    second: invisible_wall_appear_11
+  - first:
+      213: 8145091157251863185
+    second: invisible_wall_appear_12
+  - first:
+      213: 3967036417039882730
+    second: invisible_wall_appear_13
+  - first:
+      213: 5140771196328010130
+    second: invisible_wall_appear_14
+  - first:
+      213: 4130550301075710513
+    second: invisible_wall_appear_15
+  - first:
+      213: 1085787185350601829
+    second: invisible_wall_appear_16
+  - first:
+      213: 4681506290452566420
+    second: invisible_wall_appear_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: invisible_wall_appear_0
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 0
+        width: 56
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0a4e897f92273950800000000000000
+      internalID: 6428645061429185038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 38
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dcec4fab3d8b9600800000000000000
+      internalID: 476129473101360345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_2
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 0
+        width: 56
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ff089b21f01c8e50800000000000000
+      internalID: 6812838964309266425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_3
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 38
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffbcea188fd7efbd0800000000000000
+      internalID: -2594497829037749249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_4
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 0
+        width: 56
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd73d6795a7aa3fe0800000000000000
+      internalID: -1208469220343597089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_5
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 38
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 913c4fefeeaad5590800000000000000
+      internalID: -7683797445767806183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_6
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 0
+        width: 56
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0749923a9fbe2cc0800000000000000
+      internalID: -3733836372048787701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_7
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 38
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60432455815555c80800000000000000
+      internalID: -8334661972381256698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_8
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 0
+        width: 56
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1b9f29a88dea52a0800000000000000
+      internalID: -6747819920451462369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_9
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 38
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a2861c51fc7e4cf0800000000000000
+      internalID: -266137951894338907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_10
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 0
+        width: 55
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff2b34bb12325b6a0800000000000000
+      internalID: -6434197864846216449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_11
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 38
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfcc13fe0a1e6aea0800000000000000
+      internalID: -5861749783652086533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_12
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 27
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1923c23c04d290170800000000000000
+      internalID: 8145091157251863185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_13
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 27
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae953b06a9ebd0730800000000000000
+      internalID: 3967036417039882730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_14
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 27
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 291e0b48a20b75740800000000000000
+      internalID: 5140771196328010130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_15
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 27
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 132208e3d99a25930800000000000000
+      internalID: 4130550301075710513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_16
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 27
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56c6e7c31bd711f00800000000000000
+      internalID: 1085787185350601829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: invisible_wall_appear_17
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 27
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4919e20ea2d08f040800000000000000
+      internalID: 4681506290452566420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      invisible_wall_appear_0: 6428645061429185038
+      invisible_wall_appear_1: 476129473101360345
+      invisible_wall_appear_10: -6434197864846216449
+      invisible_wall_appear_11: -5861749783652086533
+      invisible_wall_appear_12: 8145091157251863185
+      invisible_wall_appear_13: 3967036417039882730
+      invisible_wall_appear_14: 5140771196328010130
+      invisible_wall_appear_15: 4130550301075710513
+      invisible_wall_appear_16: 1085787185350601829
+      invisible_wall_appear_17: 4681506290452566420
+      invisible_wall_appear_2: 6812838964309266425
+      invisible_wall_appear_3: -2594497829037749249
+      invisible_wall_appear_4: -1208469220343597089
+      invisible_wall_appear_5: -7683797445767806183
+      invisible_wall_appear_6: -3733836372048787701
+      invisible_wall_appear_7: -8334661972381256698
+      invisible_wall_appear_8: -6747819920451462369
+      invisible_wall_appear_9: -266137951894338907
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
