@@ -248,3 +248,6 @@ crashlytics-build.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/unity,python
 .plastic/
+.plastic/plastic.selector
+.gitignore
+.plastic/plastic.selector
