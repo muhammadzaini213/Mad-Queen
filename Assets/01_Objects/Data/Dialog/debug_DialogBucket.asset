@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71526196193300893bd908a673f4c252, type: 3}
+  m_Name: debug_DialogBucket
+  m_EditorClassIdentifier: Assembly-CSharp::DialogBucket
+  lines:
+  - speakerName: csw
+    portrait: {fileID: -7443756053782179069, guid: eca0e93dc40c91e449bacae8c4fcedcf, type: 3}
+    text: Will we draw furries?
+  - speakerName: Zaini
+    portrait: {fileID: 8609187230246102581, guid: 1d74965257353aa4c8ce9c0f2b54c6b5, type: 3}
+    text: No
+  - speakerName: csw
+    portrait: {fileID: -7443756053782179069, guid: eca0e93dc40c91e449bacae8c4fcedcf, type: 3}
+    text: (massive dissapointment)
