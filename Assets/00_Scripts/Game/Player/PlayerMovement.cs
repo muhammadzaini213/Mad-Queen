@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = 0f;
 
+        if (DialogHUD.IsBusy) return;
+
         Keyboard keyboard = Keyboard.current;
         if (keyboard != null)
         {

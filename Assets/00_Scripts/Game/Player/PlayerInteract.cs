@@ -12,6 +12,12 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
+        if (DialogHUD.IsBusy)
+        {
+            hud.Hide();
+            return;
+        }
+
         current = GetClosest();
 
         if (current == null)
