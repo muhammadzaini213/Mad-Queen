@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee07819f623a2cfcb4520c647b25524, type: 3}
   m_Name: GameMenuReference
   m_EditorClassIdentifier: Assembly-CSharp::SceneReference
-  sceneName: GameMenu
+  sceneName: TemplateScene_SideScroller
