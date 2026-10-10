@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6098e7656afbc8e0966bc109d89b759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slafurry.Systems.Audio.SFXPlayer
-  sfxData: {fileID: 0}
+  sfxData: {fileID: 11400000, guid: c30b358516b01225cb423af9961e9630, type: 2}
   sfxMixerGroup: {fileID: 4882950418620859817, guid: 0e3a951297b6c61c6b1fdafc24be5d90, type: 2}
 --- !u!1 &254774718
 GameObject:
@@ -496,9 +496,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ace2740ad9c01b3e8dfd2889fe2e10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slafurry.Systems.Audio.MusicPlayer
-  musicData: {fileID: 0}
+  musicData: {fileID: 11400000, guid: aa267b32602d2ae0cb297d2d4ce9aeca, type: 2}
   musicSource: {fileID: 637540597}
-  sceneTracks: []
+  sceneTracks:
+  - scene: {fileID: 11400000, guid: 846fb1fb6a737b62a8f4b036651f4735, type: 2}
+    music: {fileID: 11400000, guid: f66b4bf5c310706bfb0bc1a7ca571a17, type: 2}
+  - scene: {fileID: 11400000, guid: 8a5c4985bead532e9bbb9d691eb36b20, type: 2}
+    music: {fileID: 11400000, guid: cb139ca83708b4258b1591aa7322dd71, type: 2}
+  - scene: {fileID: 11400000, guid: 535793a7c2e7fa60da954f4656ad920f, type: 2}
+    music: {fileID: 11400000, guid: cb139ca83708b4258b1591aa7322dd71, type: 2}
+  - scene: {fileID: 11400000, guid: 37e3165f96652472a92de9f21343a713, type: 2}
+    music: {fileID: 11400000, guid: cb139ca83708b4258b1591aa7322dd71, type: 2}
 --- !u!1 &745967488
 GameObject:
   m_ObjectHideFlags: 0
