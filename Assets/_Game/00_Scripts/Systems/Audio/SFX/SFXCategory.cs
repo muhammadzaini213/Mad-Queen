@@ -9,25 +9,25 @@ public class SFXEffect
     public float volume = 1f;
     public int maxSimultaneous = 3;
 
-    [Header("Pemilihan Clip")]
-    [Tooltip("Dicentang = clip dipilih acak. Tidak dicentang = berurutan. Berlaku juga untuk mode loop (clip ganti tiap putaran).")]
+    [Header("Clip Selection")]
+    [Tooltip("Checked = clips picked randomly. Unchecked = sequential. Also applies in loop mode (clip swaps each pass).")]
     public bool isRandom = true;
 
     [Header("Fade")]
-    [Tooltip("Durasi fade-in default (detik). 0 = langsung full volume.")]
+    [Tooltip("Default fade-in duration (seconds). 0 = instant full volume.")]
     [Range(0f, 5f)]
     public float fadeIn = 0f;
-    [Tooltip("Durasi fade-out default (detik). 0 = langsung berhenti.")]
+    [Tooltip("Default fade-out duration (seconds). 0 = stop immediately.")]
     [Range(0f, 5f)]
     public float fadeOut = 0f;
 
-    [Header("Jarak (dipakai di PlaySFX3D)")]
-    [Tooltip("Suara cuma berubah VOLUME berdasarkan jarak, tanpa panning kiri/kanan. Cocok buat game 2D/top-down.")]
+    [Header("Distance (used in PlaySFX3D)")]
+    [Tooltip("Sound only changes VOLUME with distance, no left/right panning. Suited for 2D/top-down games.")]
     public bool distanceOnlyNoPanning = true;
     public AudioRolloffMode rolloffMode = AudioRolloffMode.Linear;
-    [Tooltip("Jarak di bawah ini volume full 100%.")]
+    [Tooltip("Within this distance volume is full 100%.")]
     public float minDistance = 1f;
-    [Tooltip("Jarak di atas ini suara sudah tidak terdengar sama sekali.")]
+    [Tooltip("Beyond this distance the sound is no longer audible at all.")]
     public float maxDistance = 15f;
 
     // Runtime only
@@ -43,7 +43,7 @@ public class SFXEffect
 
         if (isRandom)
         {
-            // Hindari clip yang sama dua kali berturut-turut
+            // Avoid the same clip twice in a row
             index = Random.Range(0, clips.Length);
             if (index == lastIndex)
                 index = (index + 1 + Random.Range(0, clips.Length - 1)) % clips.Length;
