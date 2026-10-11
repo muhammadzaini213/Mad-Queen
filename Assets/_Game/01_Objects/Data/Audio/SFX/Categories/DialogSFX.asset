@@ -40,7 +40,7 @@ MonoBehaviour:
     maxDistance: 0
   - groupID: Typing
     clips:
-    - {fileID: 8300000, guid: 66a373875480d78f0a3afa2d67758100, type: 3}
+    - {fileID: 8300000, guid: 892d19b0d4fda9bb69160d11cac855b7, type: 3}
     volume: 1
     maxSimultaneous: 10
     isRandom: 0

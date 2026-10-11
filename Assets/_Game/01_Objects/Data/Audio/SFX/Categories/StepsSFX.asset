@@ -18,6 +18,8 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: c35a223002238d0c6b18e518e8927644, type: 3}
     - {fileID: 8300000, guid: b7f6a72562e1233578270162254064b5, type: 3}
+    - {fileID: 8300000, guid: 18edd6adacc837b20b12077d1a820620, type: 3}
+    - {fileID: 8300000, guid: ab76d46b568bfe1098262c750fd64e45, type: 3}
     volume: 0.513
     maxSimultaneous: 2
     isRandom: 0
