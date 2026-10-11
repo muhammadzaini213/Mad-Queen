@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Slafurry.Systems.Audio.MusicData
   tracks:
   - music: {fileID: 11400000, guid: cb139ca83708b4258b1591aa7322dd71, type: 2}
-    clip: {fileID: 8300000, guid: 8583c1b3ffca8fec884fc2995247e96a, type: 3}
+    clip: {fileID: 8300000, guid: 8b9dbfe8d8e63dcc197184990fa995cb, type: 3}
     introClip: {fileID: 0}
     volume: 1
-    fadeIn: 3
-    fadeOut: 3
+    fadeIn: 1
+    fadeOut: 1
   - music: {fileID: 11400000, guid: f66b4bf5c310706bfb0bc1a7ca571a17, type: 2}
-    clip: {fileID: 8300000, guid: 1900054087485a8a386d0baf7b42e7f8, type: 3}
-    introClip: {fileID: 0}
+    clip: {fileID: 8300000, guid: f8fecca1d6690b74b9c735c14192683a, type: 3}
+    introClip: {fileID: 8300000, guid: c7a1b4ed62cfb8d18aee9ba922ab5e80, type: 3}
     volume: 1
-    fadeIn: 3
-    fadeOut: 3
+    fadeIn: 1
+    fadeOut: 1

@@ -1022,6 +1022,10 @@ MonoBehaviour:
   nextNotifier: {fileID: 2010456526127565423}
   charactersPerSecond: 40
   advanceKey: 19
+  typeSFX: {fileID: 11400000, guid: 874d2b070bf8b2a4487a807d160e1ab0, type: 2}
+  continueSFX: {fileID: 11400000, guid: 11db8fcbc506b1c809de10836f281f69, type: 2}
+  endSFX: {fileID: 11400000, guid: a3f442461053b7153ad70cd2b00fbbb0, type: 2}
+  typeSoundInterval: 2
 --- !u!114 &5800824805510342667
 MonoBehaviour:
   m_ObjectHideFlags: 0

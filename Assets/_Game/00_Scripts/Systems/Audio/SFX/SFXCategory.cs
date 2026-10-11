@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 [System.Serializable]
 public class SFXEffect
 {
@@ -10,27 +9,58 @@ public class SFXEffect
     public float volume = 1f;
     public int maxSimultaneous = 3;
 
+    [Header("Pemilihan Clip")]
+    [Tooltip("Dicentang = clip dipilih acak. Tidak dicentang = berurutan. Berlaku juga untuk mode loop (clip ganti tiap putaran).")]
+    public bool isRandom = true;
+
     [Header("Fade")]
-    [Tooltip("Durasi fade-in default (detik) saat efek ini diputar. 0 = langsung full volume.")]
+    [Tooltip("Durasi fade-in default (detik). 0 = langsung full volume.")]
     [Range(0f, 5f)]
     public float fadeIn = 0f;
-    [Tooltip("Durasi fade-out default (detik) saat efek ini dihentikan. 0 = langsung berhenti.")]
+    [Tooltip("Durasi fade-out default (detik). 0 = langsung berhenti.")]
     [Range(0f, 5f)]
     public float fadeOut = 0f;
 
     [Header("Jarak (dipakai di PlaySFX3D)")]
-    [Tooltip("Kalau dicentang, suara cuma berubah VOLUME berdasarkan jarak, tanpa panning kiri/kanan. Cocok buat game 2D/top-down.")]
+    [Tooltip("Suara cuma berubah VOLUME berdasarkan jarak, tanpa panning kiri/kanan. Cocok buat game 2D/top-down.")]
     public bool distanceOnlyNoPanning = true;
     public AudioRolloffMode rolloffMode = AudioRolloffMode.Linear;
     [Tooltip("Jarak di bawah ini volume full 100%.")]
     public float minDistance = 1f;
     [Tooltip("Jarak di atas ini suara sudah tidak terdengar sama sekali.")]
     public float maxDistance = 15f;
+
+    // Runtime only
+    [System.NonSerialized] private int sequentialIndex;
+    [System.NonSerialized] private int lastIndex = -1;
+
+    public AudioClip GetClip()
+    {
+        if (clips == null || clips.Length == 0) return null;
+        if (clips.Length == 1) return clips[0];
+
+        int index;
+
+        if (isRandom)
+        {
+            // Hindari clip yang sama dua kali berturut-turut
+            index = Random.Range(0, clips.Length);
+            if (index == lastIndex)
+                index = (index + 1 + Random.Range(0, clips.Length - 1)) % clips.Length;
+        }
+        else
+        {
+            index = sequentialIndex % clips.Length;
+            sequentialIndex = (index + 1) % clips.Length;
+        }
+
+        lastIndex = index;
+        return clips[index];
+    }
 }
 
 namespace Slafurry.Systems.Audio
 {
-
     [CreateAssetMenu(fileName = "SFX Category", menuName = "Audio/SFX Category")]
     public class SFXCategory : ScriptableObject
     {

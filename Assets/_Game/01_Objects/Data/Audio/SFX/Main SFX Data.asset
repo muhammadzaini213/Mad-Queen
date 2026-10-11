@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a31b9af8a529ba3ea3c290e47a3f733, type: 3}
   m_Name: Main SFX Data
   m_EditorClassIdentifier: Assembly-CSharp::Slafurry.Systems.Audio.SFXData
-  categories: []
+  categories:
+  - {fileID: 11400000, guid: dc8c21788f5d1e7d789841b5b49d769e, type: 2}
+  - {fileID: 11400000, guid: bb56cf90245e031b9a925d5f0161db56, type: 2}

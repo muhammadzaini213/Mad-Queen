@@ -17,18 +17,58 @@ namespace Slafurry.Systems.Audio
             public readonly Dictionary<AudioSource, string> Playing = new();
             public readonly Dictionary<AudioSource, Coroutine> FadeCoroutines = new();
             public readonly Dictionary<AudioSource, int> PlayTokens = new();
+            // Source yang sedang loop multi-clip (clip diganti manual tiap putaran)
+            public readonly Dictionary<AudioSource, SFXEffect> LoopEffects = new();
         }
 
         private readonly Dictionary<string, CategoryPool> _pools = new();
+
+        private readonly List<AudioSource> _loopBuffer = new();
 
         void Awake()
         {
             InitPools();
         }
 
+        // Loop multi-clip: begitu clip selesai, ambil clip berikutnya (random / berurutan sesuai isRandom)
+        void Update()
+        {
+            foreach (var pool in _pools.Values)
+            {
+                if (pool.LoopEffects.Count == 0) continue;
+
+                _loopBuffer.Clear();
+                _loopBuffer.AddRange(pool.LoopEffects.Keys);
+
+                foreach (var source in _loopBuffer)
+                {
+                    if (source.isPlaying) continue;
+
+                    SFXEffect effect = pool.LoopEffects[source];
+                    AudioClip next = effect.GetClip();
+
+                    if (next == null)
+                    {
+                        pool.LoopEffects.Remove(source);
+                        pool.Playing.Remove(source);
+                        continue;
+                    }
+
+                    source.clip = next;
+                    source.Play();
+                }
+            }
+        }
+
         private void InitPools()
         {
-            if (sfxData?.categories == null) return;
+            if (sfxData == null)
+            {
+                Debug.LogError("[SFXPlayer] Field 'Sfx Data' kosong. Isi di Inspector (cek prefab AudioSystem).", this);
+                return;
+            }
+
+            if (sfxData.categories == null) return;
 
             foreach (var category in sfxData.categories)
             {
@@ -67,7 +107,7 @@ namespace Slafurry.Systems.Audio
             // 1) cari source yang beneran nganggur
             foreach (var source in pool.Sources)
             {
-                if (!source.isPlaying)
+                if (!source.isPlaying && !pool.LoopEffects.ContainsKey(source))
                 {
                     StopFadeIfAny(pool, source);
                     pool.Playing.Remove(source);
@@ -96,6 +136,7 @@ namespace Slafurry.Systems.Audio
             stolen.Stop();
             stolen.loop = false;
             pool.Playing.Remove(stolen);
+            pool.LoopEffects.Remove(stolen);
 
             pool.OldestIndex = (pool.OldestIndex + 1) % pool.Sources.Length;
 
@@ -107,7 +148,7 @@ namespace Slafurry.Systems.Audio
             int count = 0;
             foreach (var source in pool.Sources)
             {
-                if (!source.isPlaying)
+                if (!source.isPlaying && !pool.LoopEffects.ContainsKey(source))
                 {
                     pool.Playing.Remove(source);
                     continue;
@@ -178,7 +219,7 @@ namespace Slafurry.Systems.Audio
             AudioSource source = GetAvailableSource(pool);
             source.transform.position = pos;
             source.spatialBlend = 1f;
-            source.loop = loop;
+            ApplyLoop(pool, source, effect, loop);
             source.clip = clip;
             source.rolloffMode = effect.rolloffMode;
             source.minDistance = effect.minDistance;
@@ -188,7 +229,7 @@ namespace Slafurry.Systems.Audio
 
             float resolvedFadeIn = fadeIn < 0f ? effect.fadeIn : fadeIn;
             StartPlaybackWithFade(pool, source, effect.volume, resolvedFadeIn);
-            ScheduleAutoTailFade(pool, source, clip, effect.fadeOut);
+            ScheduleAutoTailFade(pool, source, clip, effect.fadeOut, loop);
         }
 
         // ========================= 2D =========================
@@ -201,13 +242,27 @@ namespace Slafurry.Systems.Audio
             AudioSource source = GetAvailableSource(pool);
             source.transform.position = Vector3.zero;
             source.spatialBlend = 0f;
-            source.loop = loop;
+            ApplyLoop(pool, source, effect, loop);
             source.clip = clip;
             pool.Playing[source] = effectName;
 
             float resolvedFadeIn = fadeIn < 0f ? effect.fadeIn : fadeIn;
             StartPlaybackWithFade(pool, source, effect.volume, resolvedFadeIn);
-            ScheduleAutoTailFade(pool, source, clip, effect.fadeOut);
+            ScheduleAutoTailFade(pool, source, clip, effect.fadeOut, loop);
+        }
+
+        // 1 clip  : pakai loop bawaan AudioSource.
+        // >1 clip : loop dimatikan di AudioSource, clip diganti manual di Update().
+        private void ApplyLoop(CategoryPool pool, AudioSource source, SFXEffect effect, bool loop)
+        {
+            bool multiLoop = loop && effect.clips.Length > 1;
+
+            source.loop = loop && !multiLoop;
+
+            if (multiLoop)
+                pool.LoopEffects[source] = effect;
+            else
+                pool.LoopEffects.Remove(source);
         }
 
         private void StartPlaybackWithFade(CategoryPool pool, AudioSource source, float targetVolume, float fadeIn)
@@ -232,9 +287,9 @@ namespace Slafurry.Systems.Audio
         // Jadwalkan fade-out otomatis di ekor clip (nggak perlu ada yang manggil Stop manual).
         // Ini yang benerin klik di akhir clip yang selama ini kebiarin main tanpa fade
         // karena caller-nya lupa/nggak pernah manggil StopSFX.
-        private void ScheduleAutoTailFade(CategoryPool pool, AudioSource source, AudioClip clip, float fadeOutDuration)
+        private void ScheduleAutoTailFade(CategoryPool pool, AudioSource source, AudioClip clip, float fadeOutDuration, bool loop)
         {
-            if (fadeOutDuration <= 0f || clip == null || source.loop)
+            if (fadeOutDuration <= 0f || clip == null || loop)
                 return;
 
             int token = pool.PlayTokens.TryGetValue(source, out var v) ? v : 0;
@@ -337,6 +392,9 @@ namespace Slafurry.Systems.Audio
             if (!source.isPlaying)
                 return;
 
+            // Hentikan pergantian clip loop multi-clip; clip yang sedang jalan di-fade lalu selesai
+            pool.LoopEffects.Remove(source);
+
             StopFadeIfAny(pool, source);
 
             // Kalau clip-nya nggak loop, jangan minta fade lebih panjang dari sisa clip —
@@ -383,7 +441,7 @@ namespace Slafurry.Systems.Audio
             if (CountPlaying(pool, effectName) >= effect.maxSimultaneous)
                 return false;
 
-            clip = effect.clips[Random.Range(0, effect.clips.Length)];
+            clip = effect.GetClip();
             return true;
         }
     }
