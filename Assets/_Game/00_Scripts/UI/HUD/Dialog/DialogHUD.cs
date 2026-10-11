@@ -22,11 +22,11 @@ public class DialogHUD : MonoBehaviour
     [SerializeField] private Key advanceKey = Key.E;
 
     [Header("Audio")]
-    [Tooltip("Suara typewriter. Diputar loop selama teks mengetik, berhenti saat baris selesai.")]
+    [Tooltip("Typewriter sound. Loops while text is typing, stops when the line is done.")]
     [SerializeField] private SFXReference typeSFX;
-    [Tooltip("Suara saat lanjut ke baris dialog berikutnya.")]
+    [Tooltip("Sound played when advancing to the next dialog line.")]
     [SerializeField] private SFXReference continueSFX;
-    [Tooltip("Suara saat dialog selesai dan ditutup.")]
+    [Tooltip("Sound played when the dialog ends and closes.")]
     [SerializeField] private SFXReference endSFX;
 
     private DialogBucket bucket;
@@ -188,7 +188,7 @@ public class DialogHUD : MonoBehaviour
         isTypeSFXPlaying = false;
     }
 
-    // Referensi opsional: kosong = tidak ada suara, tanpa error
+    // Optional reference: null = no sound, no error
     private static void PlaySFX(SFXReference sfx)
     {
         if (sfx == null) return;
