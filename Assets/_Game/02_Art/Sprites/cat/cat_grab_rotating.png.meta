@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 78ffb886c65f53a45b96ae45352086bc
+guid: 94753ba10bab5fe4c9734b93f8f075d7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 84567433518312916
-    second: cat_break_iddle_0
+      213: 8719982768290413887
+    second: cat_grab_rotating_0
   - first:
-      213: 3723456309294122421
-    second: cat_break_iddle_1
+      213: 4214617522393568537
+    second: cat_grab_rotating_1
   - first:
-      213: 7009905017458613198
-    second: cat_break_iddle_2
+      213: 6783945218878987222
+    second: cat_grab_rotating_2
   - first:
-      213: 2646296886494551882
-    second: cat_break_iddle_3
+      213: 8903746031805248410
+    second: cat_grab_rotating_3
   - first:
-      213: -7741557424523429752
-    second: cat_break_iddle_4
+      213: -8051205588557690146
+    second: cat_grab_rotating_4
   - first:
-      213: -3011721522972838908
-    second: cat_break_iddle_5
+      213: -3931668314574270387
+    second: cat_grab_rotating_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,133 +115,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cat_break_iddle_0
+      name: cat_grab_rotating_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 22
-        height: 30
+        x: 0
+        y: 0
+        width: 97
+        height: 63
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ddec6af1a17c2100800000000000000
-      internalID: 84567433518312916
+      spriteID: f3d3a77902a930970800000000000000
+      internalID: 8719982768290413887
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_break_iddle_1
+      name: cat_grab_rotating_1
       rect:
         serializedVersion: 2
-        x: 71
-        y: 1
-        width: 22
-        height: 30
+        x: 97
+        y: 0
+        width: 97
+        height: 63
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b5c92c19cf5ca330800000000000000
-      internalID: 3723456309294122421
+      spriteID: 915d76e7e445d7a30800000000000000
+      internalID: 4214617522393568537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_break_iddle_2
+      name: cat_grab_rotating_2
       rect:
         serializedVersion: 2
-        x: 133
-        y: 1
-        width: 22
-        height: 30
+        x: 194
+        y: 0
+        width: 97
+        height: 63
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ecb59da297f284160800000000000000
-      internalID: 7009905017458613198
+      spriteID: 6dbddf2db3a652e50800000000000000
+      internalID: 6783945218878987222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_break_iddle_3
+      name: cat_grab_rotating_3
       rect:
         serializedVersion: 2
-        x: 195
-        y: 1
-        width: 22
-        height: 30
+        x: 291
+        y: 0
+        width: 97
+        height: 63
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a4fdab16ff889b420800000000000000
-      internalID: 2646296886494551882
+      spriteID: a93bb0487d5709b70800000000000000
+      internalID: 8903746031805248410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_break_iddle_4
+      name: cat_grab_rotating_4
       rect:
         serializedVersion: 2
-        x: 257
-        y: 1
-        width: 22
-        height: 30
+        x: 388
+        y: 0
+        width: 97
+        height: 63
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8883ef6f986709490800000000000000
-      internalID: -7741557424523429752
+      spriteID: eda0160ac2f544090800000000000000
+      internalID: -8051205588557690146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_break_iddle_5
+      name: cat_grab_rotating_5
       rect:
         serializedVersion: 2
-        x: 319
-        y: 1
-        width: 22
-        height: 30
+        x: 485
+        y: 0
+        width: 97
+        height: 63
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4043ecc4b373436d0800000000000000
-      internalID: -3011721522972838908
+      spriteID: d40542faf78ef69c0800000000000000
+      internalID: -3931668314574270387
       vertices: []
       indices: 
       edges: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 54c57d0779c116d4a957bea392846d73
     internalID: 0
     vertices: []
     indices: 
@@ -258,14 +258,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":1.0},"gridSpriteSize":{"x":97.0,"y":63.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      cat_break_iddle_0: 84567433518312916
-      cat_break_iddle_1: 3723456309294122421
-      cat_break_iddle_2: 7009905017458613198
-      cat_break_iddle_3: 2646296886494551882
-      cat_break_iddle_4: -7741557424523429752
-      cat_break_iddle_5: -3011721522972838908
+      cat_grab_rotating_0: 8719982768290413887
+      cat_grab_rotating_1: 4214617522393568537
+      cat_grab_rotating_2: 6783945218878987222
+      cat_grab_rotating_3: 8903746031805248410
+      cat_grab_rotating_4: -8051205588557690146
+      cat_grab_rotating_5: -3931668314574270387
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
