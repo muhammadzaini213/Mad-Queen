@@ -290,6 +290,7 @@ MonoBehaviour:
   moveSpeed: 5
   spriteRenderer: {fileID: 1059434340082788203}
   animator: {fileID: 1287382181914532317}
+  footstepSFX: {fileID: 11400000, guid: 1e624063130740154a030a8685e6d36f, type: 2}
 --- !u!1001 &4510063271287974094
 PrefabInstance:
   m_ObjectHideFlags: 0

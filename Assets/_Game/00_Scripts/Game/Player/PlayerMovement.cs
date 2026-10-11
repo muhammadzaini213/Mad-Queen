@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Slafurry.Systems.Audio;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -8,10 +9,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator animator;
 
+    [Header("Audio")]
+    [SerializeField] private SFXReference footstepSFX;
+
     private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
 
     private Rigidbody2D rb;
     private float horizontalInput;
+    private bool isFootstepPlaying;
 
     private void Awake()
     {
@@ -29,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         ReadInput();
         FlipSprite();
         UpdateAnimator();
+        UpdateFootstepAudio();
     }
 
     private void FixedUpdate()
@@ -37,6 +43,11 @@ public class PlayerMovement : MonoBehaviour
             horizontalInput * moveSpeed,
             rb.linearVelocity.y
         );
+    }
+
+    private void OnDisable()
+    {
+        StopFootstep();
     }
 
     private void ReadInput()
@@ -84,5 +95,31 @@ public class PlayerMovement : MonoBehaviour
         bool isMoving = !Mathf.Approximately(horizontalInput, 0f);
 
         animator.SetBool(IsMovingHash, isMoving);
+    }
+
+    private void UpdateFootstepAudio()
+    {
+        bool isMoving = !Mathf.Approximately(horizontalInput, 0f);
+
+        if (isMoving && !isFootstepPlaying)
+            StartFootstep();
+        else if (!isMoving && isFootstepPlaying)
+            StopFootstep();
+    }
+
+    private void StartFootstep()
+    {
+        if (footstepSFX == null) return;
+
+        Audio.PlaySFX2D(footstepSFX, loop: true);
+        isFootstepPlaying = true;
+    }
+
+    private void StopFootstep()
+    {
+        if (!isFootstepPlaying) return;
+
+        Audio.StopSFX(footstepSFX);
+        isFootstepPlaying = false;
     }
 }
