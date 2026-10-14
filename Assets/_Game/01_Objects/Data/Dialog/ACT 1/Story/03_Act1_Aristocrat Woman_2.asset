@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71526196193300893bd908a673f4c252, type: 3}
+  m_Name: 03_Act1_Aristocrat Woman_2
+  m_EditorClassIdentifier: Assembly-CSharp::DialogBucket
+  lines:
+  - speakerName: Aristocrat Woman
+    text: "\"...Though, if we are being entirely honest\u2026 One can hardly blame
+      the poor man for taking his leave so abruptly.\""
+  - speakerName: Aristocrat Woman
+    text: '"With features so remarkably unblessed by the angels, and god knows her
+      family has always suffered from a distressing lack of beauty"'
+  - speakerName: Aristocrat Woman
+    text: '"It is a miracle he made it to her nuptial bed at all!..."'

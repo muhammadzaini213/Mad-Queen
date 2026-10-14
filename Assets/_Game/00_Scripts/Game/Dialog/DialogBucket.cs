@@ -6,7 +6,6 @@ using UnityEngine;
 public class DialogLine
 {
     public string speakerName;
-    public Sprite portrait;
     [TextArea(2, 5)] public string text;
 }
 
