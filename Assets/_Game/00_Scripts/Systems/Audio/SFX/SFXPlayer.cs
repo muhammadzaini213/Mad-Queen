@@ -17,18 +17,58 @@ namespace Slafurry.Systems.Audio
             public readonly Dictionary<AudioSource, string> Playing = new();
             public readonly Dictionary<AudioSource, Coroutine> FadeCoroutines = new();
             public readonly Dictionary<AudioSource, int> PlayTokens = new();
+            // Source currently looping multiple clips (clip swapped manually each pass)
+            public readonly Dictionary<AudioSource, SFXEffect> LoopEffects = new();
         }
 
         private readonly Dictionary<string, CategoryPool> _pools = new();
+
+        private readonly List<AudioSource> _loopBuffer = new();
 
         void Awake()
         {
             InitPools();
         }
 
+        // Multi-clip loop: once a clip ends, grab the next one (random / sequential per isRandom)
+        void Update()
+        {
+            foreach (var pool in _pools.Values)
+            {
+                if (pool.LoopEffects.Count == 0) continue;
+
+                _loopBuffer.Clear();
+                _loopBuffer.AddRange(pool.LoopEffects.Keys);
+
+                foreach (var source in _loopBuffer)
+                {
+                    if (source.isPlaying) continue;
+
+                    SFXEffect effect = pool.LoopEffects[source];
+                    AudioClip next = effect.GetClip();
+
+                    if (next == null)
+                    {
+                        pool.LoopEffects.Remove(source);
+                        pool.Playing.Remove(source);
+                        continue;
+                    }
+
+                    source.clip = next;
+                    source.Play();
+                }
+            }
+        }
+
         private void InitPools()
         {
-            if (sfxData?.categories == null) return;
+            if (sfxData == null)
+            {
+                Debug.LogError("[SFXPlayer] Field 'Sfx Data' is empty. Fill it in the Inspector (check the AudioSystem prefab).", this);
+                return;
+            }
+
+            if (sfxData.categories == null) return;
 
             foreach (var category in sfxData.categories)
             {
@@ -64,10 +104,10 @@ namespace Slafurry.Systems.Audio
 
         private AudioSource GetAvailableSource(CategoryPool pool)
         {
-            // 1) cari source yang beneran nganggur
+            // 1) find a source that is truly idle
             foreach (var source in pool.Sources)
             {
-                if (!source.isPlaying)
+                if (!source.isPlaying && !pool.LoopEffects.ContainsKey(source))
                 {
                     StopFadeIfAny(pool, source);
                     pool.Playing.Remove(source);
@@ -76,9 +116,9 @@ namespace Slafurry.Systems.Audio
                 }
             }
 
-            // 2) semua sibuk -> utamakan curi source yang TIDAK sedang fade,
-            //    biar fade-out yang lagi berjalan nggak kepotong paksa di tengah.
-            //    Source yang sedang fade cuma dicuri kalau memang kepepet (langkah 3).
+            // 2) all busy -> prefer stealing a source that is NOT fading,
+            //    so a fade-out already in progress is not force-cut mid-way.
+            //    A fading source is only stolen when there is no other choice (step 3).
             AudioSource nonFadingCandidate = null;
             foreach (var source in pool.Sources)
             {
@@ -89,13 +129,14 @@ namespace Slafurry.Systems.Audio
                 }
             }
 
-            // 3) fallback: semua source lagi fade juga -> terpaksa pakai round-robin lama
+            // 3) fallback: every source is fading too -> fall back to the old round-robin
             AudioSource stolen = nonFadingCandidate != null ? nonFadingCandidate : pool.Sources[pool.OldestIndex];
 
             StopFadeIfAny(pool, stolen);
             stolen.Stop();
             stolen.loop = false;
             pool.Playing.Remove(stolen);
+            pool.LoopEffects.Remove(stolen);
 
             pool.OldestIndex = (pool.OldestIndex + 1) % pool.Sources.Length;
 
@@ -107,7 +148,7 @@ namespace Slafurry.Systems.Audio
             int count = 0;
             foreach (var source in pool.Sources)
             {
-                if (!source.isPlaying)
+                if (!source.isPlaying && !pool.LoopEffects.ContainsKey(source))
                 {
                     pool.Playing.Remove(source);
                     continue;
@@ -120,11 +161,11 @@ namespace Slafurry.Systems.Audio
         }
 
         // ========================= FADE CORE =========================
-        // Interpolasi dilakukan di ranah desibel (dB), bukan linear.
-        // Ini penting karena SFXEffect.volume bisa > 1 (boost/gain, bisa sampai clipping) —
-        // fade linear/kuadratik di ranah amplitude akan "mentok" begitu sinyal clipping,
-        // jadi kerasa berhenti di tengah jalan. Fade di ranah dB tetap kerasa mulus
-        // berapa pun besar target volume-nya.
+        // Interpolation is done in the decibel (dB) domain, not linear.
+        // This matters because SFXEffect.volume can be > 1 (boost/gain, up to clipping) —
+        // a linear/quadratic fade in the amplitude domain "flatlines" once the signal clips,
+        // so it feels like it stops mid-way. A fade in the dB domain stays smooth
+        // no matter how large the target volume is.
         private const float MinDecibel = -80f;
 
         private static float LinearToDecibel(float linear)
@@ -164,12 +205,12 @@ namespace Slafurry.Systems.Audio
         }
 
         // ========================= 3D =========================
-        // fadeIn < 0  => pakai default dari SFXEffect.fadeIn
-        // Volume otomatis mengikuti jarak ke AudioListener berdasarkan
-        // minDistance/maxDistance/rolloffMode di SFXEffect. Kalau
-        // effect.distanceOnlyNoPanning true, suara tidak akan panning
-        // kiri/kanan (spread 360°) — pas buat game 2D/top-down yang cuma
-        // butuh "makin jauh makin pelan", bukan efek 3D penuh.
+        // fadeIn < 0  => use the default from SFXEffect.fadeIn
+        // Volume automatically follows distance to the AudioListener based on
+        // minDistance/maxDistance/rolloffMode in SFXEffect. If
+        // effect.distanceOnlyNoPanning is true, the sound does not pan
+        // left/right (spread 360°) — suited for 2D/top-down games that only
+        // need "quieter when farther", not full 3D.
         public void PlaySFX3D(string categoryName, string effectName, Vector3 pos, bool loop = false, float fadeIn = -1f)
         {
             if (!TryPrepare(categoryName, effectName, out var pool, out var effect, out var clip))
@@ -178,7 +219,7 @@ namespace Slafurry.Systems.Audio
             AudioSource source = GetAvailableSource(pool);
             source.transform.position = pos;
             source.spatialBlend = 1f;
-            source.loop = loop;
+            ApplyLoop(pool, source, effect, loop);
             source.clip = clip;
             source.rolloffMode = effect.rolloffMode;
             source.minDistance = effect.minDistance;
@@ -188,11 +229,11 @@ namespace Slafurry.Systems.Audio
 
             float resolvedFadeIn = fadeIn < 0f ? effect.fadeIn : fadeIn;
             StartPlaybackWithFade(pool, source, effect.volume, resolvedFadeIn);
-            ScheduleAutoTailFade(pool, source, clip, effect.fadeOut);
+            ScheduleAutoTailFade(pool, source, clip, effect.fadeOut, loop);
         }
 
         // ========================= 2D =========================
-        // fadeIn < 0  => pakai default dari SFXEffect.fadeIn
+        // fadeIn < 0  => use the default from SFXEffect.fadeIn
         public void PlaySFX2D(string categoryName, string effectName, bool loop = false, float fadeIn = -1f)
         {
             if (!TryPrepare(categoryName, effectName, out var pool, out var effect, out var clip))
@@ -201,19 +242,33 @@ namespace Slafurry.Systems.Audio
             AudioSource source = GetAvailableSource(pool);
             source.transform.position = Vector3.zero;
             source.spatialBlend = 0f;
-            source.loop = loop;
+            ApplyLoop(pool, source, effect, loop);
             source.clip = clip;
             pool.Playing[source] = effectName;
 
             float resolvedFadeIn = fadeIn < 0f ? effect.fadeIn : fadeIn;
             StartPlaybackWithFade(pool, source, effect.volume, resolvedFadeIn);
-            ScheduleAutoTailFade(pool, source, clip, effect.fadeOut);
+            ScheduleAutoTailFade(pool, source, clip, effect.fadeOut, loop);
+        }
+
+        // 1 clip  : use the AudioSource's built-in loop.
+        // >1 clip : loop disabled on the AudioSource, clip swapped manually in Update().
+        private void ApplyLoop(CategoryPool pool, AudioSource source, SFXEffect effect, bool loop)
+        {
+            bool multiLoop = loop && effect.clips.Length > 1;
+
+            source.loop = loop && !multiLoop;
+
+            if (multiLoop)
+                pool.LoopEffects[source] = effect;
+            else
+                pool.LoopEffects.Remove(source);
         }
 
         private void StartPlaybackWithFade(CategoryPool pool, AudioSource source, float targetVolume, float fadeIn)
         {
-            // Setiap kali source ini mulai play baru, invalidasi auto tail-fade
-            // dari play sebelumnya (kalau ada) supaya nggak salah nge-fade audio yang baru.
+            // Every time this source starts a new play, invalidate the previous auto tail-fade
+            // (if any) so it does not fade the new audio by mistake.
             pool.PlayTokens[source] = pool.PlayTokens.TryGetValue(source, out var v) ? v + 1 : 1;
 
             if (fadeIn > 0f)
@@ -229,12 +284,12 @@ namespace Slafurry.Systems.Audio
             }
         }
 
-        // Jadwalkan fade-out otomatis di ekor clip (nggak perlu ada yang manggil Stop manual).
-        // Ini yang benerin klik di akhir clip yang selama ini kebiarin main tanpa fade
-        // karena caller-nya lupa/nggak pernah manggil StopSFX.
-        private void ScheduleAutoTailFade(CategoryPool pool, AudioSource source, AudioClip clip, float fadeOutDuration)
+        // Schedule an automatic fade-out at the tail of the clip (no need for a manual Stop call).
+        // This fixes the click at the end of clips that used to play without a fade
+        // because the caller forgot to / never called StopSFX.
+        private void ScheduleAutoTailFade(CategoryPool pool, AudioSource source, AudioClip clip, float fadeOutDuration, bool loop)
         {
-            if (fadeOutDuration <= 0f || clip == null || source.loop)
+            if (fadeOutDuration <= 0f || clip == null || loop)
                 return;
 
             int token = pool.PlayTokens.TryGetValue(source, out var v) ? v : 0;
@@ -249,7 +304,7 @@ namespace Slafurry.Systems.Audio
         {
             yield return new WaitForSeconds(delay);
 
-            // Kalau source udah dipakai ulang buat play lain sebelum waktunya, batalkan.
+            // If the source was reused for another play before the scheduled time, cancel.
             if (!pool.PlayTokens.TryGetValue(source, out var currentToken) || currentToken != token)
                 yield break;
 
@@ -258,7 +313,7 @@ namespace Slafurry.Systems.Audio
         }
 
         // ========================= STOP =========================
-        // fadeOut < 0  => pakai default per-effect dari SFXEffect.fadeOut
+        // fadeOut < 0  => use the per-effect default from SFXEffect.fadeOut
         public void StopAllSFX(float fadeOut = -1f)
         {
             foreach (var kvp in _pools)
@@ -337,11 +392,14 @@ namespace Slafurry.Systems.Audio
             if (!source.isPlaying)
                 return;
 
+            // Stop multi-clip loop swapping; fade out the currently playing clip, then finish
+            pool.LoopEffects.Remove(source);
+
             StopFadeIfAny(pool, source);
 
-            // Kalau clip-nya nggak loop, jangan minta fade lebih panjang dari sisa clip —
-            // kalau dipaksa, audio-nya keburu abis duluan sebelum fade sempat turun ke 0,
-            // hasilnya kedengeran kepotong mendadak, bukan fade.
+            // If the clip does not loop, do not request a fade longer than the clip's remaining time —
+            // if forced, the audio runs out before the fade reaches 0,
+            // which sounds like an abrupt cut instead of a fade.
             if (fadeOut > 0f && !source.loop && source.clip != null)
             {
                 float pitch = Mathf.Max(Mathf.Abs(source.pitch), 0.01f);
@@ -369,21 +427,21 @@ namespace Slafurry.Systems.Audio
 
             if (!_pools.TryGetValue(categoryName, out pool))
             {
-                Debug.LogWarning($"[SFXPlayer] Category '{categoryName}' tidak ditemukan.");
+                Debug.LogWarning($"[SFXPlayer] Category '{categoryName}' not found.");
                 return false;
             }
 
             effect = sfxData.GetSFXEffect(categoryName, effectName);
             if (effect == null || effect.clips == null || effect.clips.Length == 0)
             {
-                Debug.LogWarning($"[SFXPlayer] SFX '{categoryName}/{effectName}' tidak ditemukan.");
+                Debug.LogWarning($"[SFXPlayer] SFX '{categoryName}/{effectName}' not found.");
                 return false;
             }
 
             if (CountPlaying(pool, effectName) >= effect.maxSimultaneous)
                 return false;
 
-            clip = effect.clips[Random.Range(0, effect.clips.Length)];
+            clip = effect.GetClip();
             return true;
         }
     }

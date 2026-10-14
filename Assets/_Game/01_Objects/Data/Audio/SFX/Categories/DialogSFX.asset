@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f389c41d65c452db0308108628f351, type: 3}
+  m_Name: DialogSFX
+  m_EditorClassIdentifier: Assembly-CSharp::Slafurry.Systems.Audio.SFXCategory
+  categoryName: Dialog
+  effects:
+  - groupID: Continue
+    clips:
+    - {fileID: 8300000, guid: 66a373875480d78f0a3afa2d67758100, type: 3}
+    volume: 0.935
+    maxSimultaneous: 3
+    isRandom: 0
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+  - groupID: End
+    clips:
+    - {fileID: 8300000, guid: 919bd31cb5eb211dab3b90e7ae8f86cb, type: 3}
+    volume: 0.903
+    maxSimultaneous: 1
+    isRandom: 0
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+  - groupID: Typing
+    clips:
+    - {fileID: 8300000, guid: 892d19b0d4fda9bb69160d11cac855b7, type: 3}
+    volume: 1
+    maxSimultaneous: 10
+    isRandom: 0
+    fadeIn: 0
+    fadeOut: 0
+    distanceOnlyNoPanning: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+  poolSize: 8

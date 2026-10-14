@@ -566,7 +566,7 @@ MonoBehaviour:
   - {fileID: 745967489}
   - {fileID: 849819632}
   - {fileID: 802905561}
-  minimumDelay: 0
+  minimumDelay: 1
 --- !u!4 &305576478
 Transform:
   m_ObjectHideFlags: 0

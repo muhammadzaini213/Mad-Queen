@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Slafurry.Systems.Audio;
 
 public class DialogHUD : MonoBehaviour
 {
@@ -20,12 +21,21 @@ public class DialogHUD : MonoBehaviour
     [SerializeField] private float charactersPerSecond = 40f;
     [SerializeField] private Key advanceKey = Key.E;
 
+    [Header("Audio")]
+    [Tooltip("Typewriter sound. Loops while text is typing, stops when the line is done.")]
+    [SerializeField] private SFXReference typeSFX;
+    [Tooltip("Sound played when advancing to the next dialog line.")]
+    [SerializeField] private SFXReference continueSFX;
+    [Tooltip("Sound played when the dialog ends and closes.")]
+    [SerializeField] private SFXReference endSFX;
+
     private DialogBucket bucket;
     private Action onFinished;
     private Coroutine typingRoutine;
     private int index;
     private bool isOpen;
     private bool isTyping;
+    private bool isTypeSFXPlaying;
     private int startedFrame = -1;
     private int closedFrame = -1;
 
@@ -34,6 +44,11 @@ public class DialogHUD : MonoBehaviour
         Instance = this;
         container.SetActive(false);
         nextNotifier.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        StopTypeSFX();
     }
 
     private void OnDestroy()
@@ -91,6 +106,9 @@ public class DialogHUD : MonoBehaviour
         int total = dialogText.textInfo.characterCount;
         WaitForSecondsRealtime delay = new WaitForSecondsRealtime(1f / Mathf.Max(1f, charactersPerSecond));
 
+        if (total > 0)
+            StartTypeSFX();
+
         for (int i = 1; i <= total; i++)
         {
             dialogText.maxVisibleCharacters = i;
@@ -114,6 +132,8 @@ public class DialogHUD : MonoBehaviour
         isTyping = false;
         dialogText.maxVisibleCharacters = int.MaxValue;
         nextNotifier.SetActive(true);
+
+        StopTypeSFX();
     }
 
     private void NextLine()
@@ -121,9 +141,14 @@ public class DialogHUD : MonoBehaviour
         index++;
 
         if (index >= bucket.Lines.Count)
+        {
             Close();
+        }
         else
+        {
+            PlaySFX(continueSFX);
             ShowLine();
+        }
     }
 
     private void Close()
@@ -139,6 +164,35 @@ public class DialogHUD : MonoBehaviour
         container.SetActive(false);
         nextNotifier.SetActive(false);
 
+        StopTypeSFX();
+        PlaySFX(endSFX);
+
         callback?.Invoke();
+    }
+
+    // ======================== AUDIO ========================
+
+    private void StartTypeSFX()
+    {
+        if (typeSFX == null || isTypeSFXPlaying) return;
+
+        Audio.PlaySFX2D(typeSFX, loop: true);
+        isTypeSFXPlaying = true;
+    }
+
+    private void StopTypeSFX()
+    {
+        if (!isTypeSFXPlaying) return;
+
+        Audio.StopSFX(typeSFX);
+        isTypeSFXPlaying = false;
+    }
+
+    // Optional reference: null = no sound, no error
+    private static void PlaySFX(SFXReference sfx)
+    {
+        if (sfx == null) return;
+
+        Audio.PlaySFX2D(sfx);
     }
 }

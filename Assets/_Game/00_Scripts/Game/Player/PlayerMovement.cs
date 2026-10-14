@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Slafurry.Systems.Audio;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -8,10 +9,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator animator;
 
-    private static readonly int SpeedHash = Animator.StringToHash("Speed");
+    [Header("Audio")]
+    [SerializeField] private SFXReference footstepSFX;
+
+    private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
 
     private Rigidbody2D rb;
     private float horizontalInput;
+    private bool isFootstepPlaying;
 
     private void Awake()
     {
@@ -29,11 +34,20 @@ public class PlayerMovement : MonoBehaviour
         ReadInput();
         FlipSprite();
         UpdateAnimator();
+        UpdateFootstepAudio();
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(
+            horizontalInput * moveSpeed,
+            rb.linearVelocity.y
+        );
+    }
+
+    private void OnDisable()
+    {
+        StopFootstep();
     }
 
     private void ReadInput()
@@ -43,18 +57,22 @@ public class PlayerMovement : MonoBehaviour
         if (DialogHUD.IsBusy) return;
 
         Keyboard keyboard = Keyboard.current;
+
         if (keyboard != null)
         {
             if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed)
                 horizontalInput -= 1f;
+
             if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed)
                 horizontalInput += 1f;
         }
 
         Gamepad gamepad = Gamepad.current;
+
         if (gamepad != null && Mathf.Approximately(horizontalInput, 0f))
         {
             float stick = gamepad.leftStick.x.ReadValue();
+
             if (Mathf.Abs(stick) > 0.2f)
                 horizontalInput = Mathf.Sign(stick);
         }
@@ -73,6 +91,35 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateAnimator()
     {
         if (animator == null) return;
-        animator.SetFloat(SpeedHash, Mathf.Abs(horizontalInput));
+
+        bool isMoving = !Mathf.Approximately(horizontalInput, 0f);
+
+        animator.SetBool(IsMovingHash, isMoving);
+    }
+
+    private void UpdateFootstepAudio()
+    {
+        bool isMoving = !Mathf.Approximately(horizontalInput, 0f);
+
+        if (isMoving && !isFootstepPlaying)
+            StartFootstep();
+        else if (!isMoving && isFootstepPlaying)
+            StopFootstep();
+    }
+
+    private void StartFootstep()
+    {
+        if (footstepSFX == null) return;
+
+        Audio.PlaySFX2D(footstepSFX, loop: true);
+        isFootstepPlaying = true;
+    }
+
+    private void StopFootstep()
+    {
+        if (!isFootstepPlaying) return;
+
+        Audio.StopSFX(footstepSFX);
+        isFootstepPlaying = false;
     }
 }
