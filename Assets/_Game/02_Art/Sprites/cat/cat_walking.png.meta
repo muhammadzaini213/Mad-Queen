@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: e0b12f6e36d69a34d9d27c22763f9560
+guid: 41311dd235483db47a9f71dfbe5f8c8c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6741241355095175735
-    second: cat_iddle_0
+      213: -5104426211341067777
+    second: cat_walking_0
   - first:
-      213: -904934406761465984
-    second: cat_iddle_1
+      213: 232283729494295946
+    second: cat_walking_1
   - first:
-      213: 6886257117114347653
-    second: cat_iddle_2
+      213: -5564329796974520614
+    second: cat_walking_2
   - first:
-      213: -8889455704553391862
-    second: cat_iddle_3
-  - first:
-      213: 2143436758762930405
-    second: cat_iddle_4
-  - first:
-      213: -2746326517664843319
-    second: cat_iddle_5
+      213: 3746969293424720867
+    second: cat_walking_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,133 +109,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cat_iddle_0
+      name: cat_walking_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 10
-        width: 13
-        height: 14
+        x: 0
+        y: 0
+        width: 52
+        height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9cd016444bc4272a0800000000000000
-      internalID: -6741241355095175735
+      spriteID: ff992dab76f6929b0800000000000000
+      internalID: -5104426211341067777
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_iddle_1
+      name: cat_walking_1
       rect:
         serializedVersion: 2
-        x: 71
-        y: 10
-        width: 13
-        height: 14
+        x: 52
+        y: 0
+        width: 52
+        height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 08734fb93f60173f0800000000000000
-      internalID: -904934406761465984
+      spriteID: a854c9f32dc393300800000000000000
+      internalID: 232283729494295946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_iddle_2
+      name: cat_walking_2
       rect:
         serializedVersion: 2
-        x: 123
-        y: 10
-        width: 13
-        height: 14
+        x: 104
+        y: 0
+        width: 52
+        height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5803b91fc56e09f50800000000000000
-      internalID: 6886257117114347653
+      spriteID: ad6563ed78787c2b0800000000000000
+      internalID: -5564329796974520614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cat_iddle_3
+      name: cat_walking_3
       rect:
         serializedVersion: 2
-        x: 175
-        y: 10
-        width: 13
-        height: 14
+        x: 156
+        y: 0
+        width: 52
+        height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a097683922f42a480800000000000000
-      internalID: -8889455704553391862
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_iddle_4
-      rect:
-        serializedVersion: 2
-        x: 227
-        y: 10
-        width: 13
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5e0449c20640fbd10800000000000000
-      internalID: 2143436758762930405
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_iddle_5
-      rect:
-        serializedVersion: 2
-        x: 279
-        y: 10
-        width: 13
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9c9f955359613e9d0800000000000000
-      internalID: -2746326517664843319
+      spriteID: 3eb70e658b8eff330800000000000000
+      internalID: 3746969293424720867
       vertices: []
       indices: 
       edges: []
@@ -250,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b9108fb8fb929674592f66669133688d
     internalID: 0
     vertices: []
     indices: 
@@ -258,14 +208,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":52.0,"y":58.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      cat_iddle_0: -6741241355095175735
-      cat_iddle_1: -904934406761465984
-      cat_iddle_2: 6886257117114347653
-      cat_iddle_3: -8889455704553391862
-      cat_iddle_4: 2143436758762930405
-      cat_iddle_5: -2746326517664843319
+      cat_walking_0: -5104426211341067777
+      cat_walking_1: 232283729494295946
+      cat_walking_2: -5564329796974520614
+      cat_walking_3: 3746969293424720867
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -79,7 +79,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -93,7 +93,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,7 +117,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -145,12 +145,12 @@ TextureImporter:
       name: cat_break_scape_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 22
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.3235, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -167,12 +167,12 @@ TextureImporter:
       name: cat_break_scape_1
       rect:
         serializedVersion: 2
-        x: 71
-        y: 1
-        width: 22
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 62
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.3235, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -189,12 +189,12 @@ TextureImporter:
       name: cat_break_scape_2
       rect:
         serializedVersion: 2
-        x: 133
-        y: 1
-        width: 22
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 124
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.3235, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -211,12 +211,12 @@ TextureImporter:
       name: cat_break_scape_3
       rect:
         serializedVersion: 2
-        x: 195
-        y: 1
-        width: 27
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 186
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.3235, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -233,12 +233,12 @@ TextureImporter:
       name: cat_break_scape_4
       rect:
         serializedVersion: 2
-        x: 257
-        y: 1
-        width: 29
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 248
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.3235, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -255,12 +255,12 @@ TextureImporter:
       name: cat_break_scape_5
       rect:
         serializedVersion: 2
-        x: 319
-        y: 1
-        width: 22
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 310
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.3235, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -277,19 +277,19 @@ TextureImporter:
       name: cat_break_scape_6
       rect:
         serializedVersion: 2
-        x: 338
-        y: 1
-        width: 13
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 372
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.3235, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 31ecbf5a80a3e4af0800000000000000
+      spriteID: c606af9dd8399df428489edf7bb699a4
       internalID: -410326707225244141
       vertices: []
       indices: 
@@ -299,19 +299,19 @@ TextureImporter:
       name: cat_break_scape_7
       rect:
         serializedVersion: 2
-        x: 381
+        x: 434
         y: 0
-        width: 22
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.3235, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f7deaaf5141556530800000000000000
+      spriteID: 3653c2433570b964db0ee2955195f530
       internalID: 3847570797877718399
       vertices: []
       indices: 
@@ -321,19 +321,19 @@ TextureImporter:
       name: cat_break_scape_8
       rect:
         serializedVersion: 2
-        x: 402
-        y: 1
-        width: 14
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 496
+        y: 0
+        width: 62
+        height: 62
+      alignment: 9
+      pivot: {x: 0.3235, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c7b9837d03ed72ec0800000000000000
+      spriteID: 892879698f30042499fc987e6e2e57e9
       internalID: -3591657876454073476
       vertices: []
       indices: 
@@ -343,130 +343,20 @@ TextureImporter:
       name: cat_break_scape_9
       rect:
         serializedVersion: 2
-        x: 439
+        x: 558
         y: 0
-        width: 30
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 50
+        height: 62
+      alignment: 9
+      pivot: {x: 0.4, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 29bf3255970422790800000000000000
+      spriteID: fcbd90c5b16f8f6458bc3914ce2fa9a8
       internalID: -7556406334910628974
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_break_scape_10
-      rect:
-        serializedVersion: 2
-        x: 469
-        y: 1
-        width: 15
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5498a510bc58e5600800000000000000
-      internalID: 458951318985935173
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_break_scape_11
-      rect:
-        serializedVersion: 2
-        x: 500
-        y: 0
-        width: 33
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2b96f45c99849f0e0800000000000000
-      internalID: -2235675914735228494
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_break_scape_12
-      rect:
-        serializedVersion: 2
-        x: 536
-        y: 1
-        width: 13
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2e35732f7a1ec03c0800000000000000
-      internalID: -4391887425153575966
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_break_scape_13
-      rect:
-        serializedVersion: 2
-        x: 561
-        y: 0
-        width: 35
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d9f87099563e10a40800000000000000
-      internalID: 5332793459281989533
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_break_scape_14
-      rect:
-        serializedVersion: 2
-        x: 607
-        y: 1
-        width: 13
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6015fbf828992abb0800000000000000
-      internalID: -4926206256353423098
       vertices: []
       indices: 
       edges: []
@@ -475,7 +365,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0e78c7203ef848943ad8b0a3401ae39c
     internalID: 0
     vertices: []
     indices: 
@@ -483,15 +373,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":10.0,"y":1.0},"gridSpriteSize":{"x":62.0,"y":62.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.32350000739097597,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       cat_break_scape_0: 5474723020861813598
       cat_break_scape_1: -4480361145436341294
-      cat_break_scape_10: 458951318985935173
-      cat_break_scape_11: -2235675914735228494
-      cat_break_scape_12: -4391887425153575966
-      cat_break_scape_13: 5332793459281989533
-      cat_break_scape_14: -4926206256353423098
       cat_break_scape_2: 8056768054772196249
       cat_break_scape_3: 3779138214779048693
       cat_break_scape_4: -446670991314137271
