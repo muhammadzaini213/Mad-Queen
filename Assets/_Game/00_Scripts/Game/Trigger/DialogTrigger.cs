@@ -3,13 +3,14 @@ using UnityEngine.Events;
 
 public class DialogTrigger : MonoBehaviour
 {
+    [SerializeField] private DialogHUD dialogHUD;
     [SerializeField] private DialogBucket bucket;
     [SerializeField] private UnityEvent onFinished;
 
     public void Trigger()
     {
-        if (DialogHUD.Instance == null) return;
+        if (dialogHUD == null) return;
 
-        DialogHUD.Instance.Play(bucket, onFinished.Invoke);
+        dialogHUD.Play(bucket, onFinished.Invoke);
     }
 }

@@ -8,15 +8,11 @@ using Slafurry.Systems.Audio;
 
 public class DialogHUD : MonoBehaviour
 {
-    public static DialogHUD Instance { get; private set; }
-
-    public static bool IsBusy =>
-        Instance != null && (Instance.isOpen || Instance.closedFrame == Time.frameCount);
+    public bool IsBusy => isOpen || closedFrame == Time.frameCount;
 
     [SerializeField] private GameObject container;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogText;
-    [SerializeField] private Image portraitImage;
     [SerializeField] private GameObject nextNotifier;
     [SerializeField] private float charactersPerSecond = 40f;
     [SerializeField] private Key advanceKey = Key.E;
@@ -24,8 +20,10 @@ public class DialogHUD : MonoBehaviour
     [Header("Audio")]
     [Tooltip("Typewriter sound. Loops while text is typing, stops when the line is done.")]
     [SerializeField] private SFXReference typeSFX;
+
     [Tooltip("Sound played when advancing to the next dialog line.")]
     [SerializeField] private SFXReference continueSFX;
+
     [Tooltip("Sound played when the dialog ends and closes.")]
     [SerializeField] private SFXReference endSFX;
 
@@ -41,7 +39,6 @@ public class DialogHUD : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
         container.SetActive(false);
         nextNotifier.SetActive(false);
     }
@@ -51,18 +48,15 @@ public class DialogHUD : MonoBehaviour
         StopTypeSFX();
     }
 
-    private void OnDestroy()
-    {
-        if (Instance == this)
-            Instance = null;
-    }
-
     private void Update()
     {
-        if (!isOpen || Time.frameCount == startedFrame) return;
+        if (!isOpen || Time.frameCount == startedFrame)
+            return;
 
         Keyboard keyboard = Keyboard.current;
-        if (keyboard == null || !keyboard[advanceKey].wasPressedThisFrame) return;
+
+        if (keyboard == null || !keyboard[advanceKey].wasPressedThisFrame)
+            return;
 
         if (isTyping)
             CompleteLine();
@@ -72,7 +66,8 @@ public class DialogHUD : MonoBehaviour
 
     public void Play(DialogBucket newBucket, Action finished = null)
     {
-        if (isOpen || newBucket == null || newBucket.Lines.Count == 0) return;
+        if (isOpen || newBucket == null || newBucket.Lines.Count == 0)
+            return;
 
         bucket = newBucket;
         onFinished = finished;
@@ -89,10 +84,10 @@ public class DialogHUD : MonoBehaviour
         DialogLine line = bucket.Lines[index];
 
         nameText.text = line.speakerName;
-        portraitImage.sprite = line.portrait;
-        portraitImage.enabled = line.portrait != null;
+
         dialogText.text = line.text;
         dialogText.maxVisibleCharacters = 0;
+
         nextNotifier.SetActive(false);
 
         typingRoutine = StartCoroutine(TypeLine());
@@ -103,8 +98,12 @@ public class DialogHUD : MonoBehaviour
         isTyping = true;
 
         dialogText.ForceMeshUpdate();
+
         int total = dialogText.textInfo.characterCount;
-        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(1f / Mathf.Max(1f, charactersPerSecond));
+
+        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(
+            1f / Mathf.Max(1f, charactersPerSecond)
+        );
 
         if (total > 0)
             StartTypeSFX();
@@ -130,6 +129,7 @@ public class DialogHUD : MonoBehaviour
     {
         typingRoutine = null;
         isTyping = false;
+
         dialogText.maxVisibleCharacters = int.MaxValue;
         nextNotifier.SetActive(true);
 
@@ -158,6 +158,7 @@ public class DialogHUD : MonoBehaviour
         isOpen = false;
         isTyping = false;
         closedFrame = Time.frameCount;
+
         bucket = null;
         onFinished = null;
 
@@ -174,25 +175,32 @@ public class DialogHUD : MonoBehaviour
 
     private void StartTypeSFX()
     {
-        if (typeSFX == null || isTypeSFXPlaying) return;
+        if (typeSFX == null || isTypeSFXPlaying)
+            return;
 
+        if (AudioSystem.Instance == null)
+            return;
         Audio.PlaySFX2D(typeSFX, loop: true);
         isTypeSFXPlaying = true;
     }
 
     private void StopTypeSFX()
     {
-        if (!isTypeSFXPlaying) return;
+        if (!isTypeSFXPlaying)
+            return;
 
+        if (AudioSystem.Instance == null)
+            return;
         Audio.StopSFX(typeSFX);
         isTypeSFXPlaying = false;
     }
 
-    // Optional reference: null = no sound, no error
     private static void PlaySFX(SFXReference sfx)
     {
-        if (sfx == null) return;
-
+        if (sfx == null)
+            return;
+        if (AudioSystem.Instance == null)
+            return;
         Audio.PlaySFX2D(sfx);
     }
 }

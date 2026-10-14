@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71526196193300893bd908a673f4c252, type: 3}
+  m_Name: 10_Act1_Queen Thinking_5
+  m_EditorClassIdentifier: Assembly-CSharp::DialogBucket
+  lines:
+  - speakerName: Queen
+    text: "(\u201COh heavens,30 minutes have passed?! JUST. 30. MINUTES?! Please
+      tell me it\u2019s a really boring dream\u201D)"

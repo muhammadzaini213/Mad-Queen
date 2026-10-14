@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Slafurry.Systems.Audio;
@@ -5,6 +6,7 @@ using Slafurry.Systems.Audio;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator animator;
@@ -12,7 +14,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private SFXReference footstepSFX;
 
-    private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
+    [Header("Dialog")]
+    [SerializeField] private DialogHUD[] dialogHUDs;
+
+    private static readonly int IsMovingHash =
+        Animator.StringToHash("isMoving");
 
     private Rigidbody2D rb;
     private float horizontalInput;
@@ -27,6 +33,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+
+        // Ambil semua DialogHUD di scene jika belum diisi Inspector.
+        if (dialogHUDs == null || dialogHUDs.Length == 0)
+        {
+            dialogHUDs = FindObjectsByType<DialogHUD>(
+                FindObjectsSortMode.None
+            );
+        }
     }
 
     private void Update()
@@ -47,6 +61,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
+        horizontalInput = 0f;
+
+        if (rb != null)
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+
         StopFootstep();
     }
 
@@ -54,22 +73,30 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = 0f;
 
-        if (DialogHUD.IsBusy) return;
+        if (IsDialogBusy())
+            return;
 
         Keyboard keyboard = Keyboard.current;
 
         if (keyboard != null)
         {
-            if (keyboard.aKey.isPressed || keyboard.leftArrowKey.isPressed)
+            if (keyboard.aKey.isPressed ||
+                keyboard.leftArrowKey.isPressed)
+            {
                 horizontalInput -= 1f;
+            }
 
-            if (keyboard.dKey.isPressed || keyboard.rightArrowKey.isPressed)
+            if (keyboard.dKey.isPressed ||
+                keyboard.rightArrowKey.isPressed)
+            {
                 horizontalInput += 1f;
+            }
         }
 
         Gamepad gamepad = Gamepad.current;
 
-        if (gamepad != null && Mathf.Approximately(horizontalInput, 0f))
+        if (gamepad != null &&
+            Mathf.Approximately(horizontalInput, 0f))
         {
             float stick = gamepad.leftStick.x.ReadValue();
 
@@ -78,9 +105,24 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool IsDialogBusy()
+    {
+        if (dialogHUDs == null)
+            return false;
+
+        foreach (DialogHUD dialog in dialogHUDs)
+        {
+            if (dialog != null && dialog.IsBusy)
+                return true;
+        }
+
+        return false;
+    }
+
     private void FlipSprite()
     {
-        if (spriteRenderer == null) return;
+        if (spriteRenderer == null)
+            return;
 
         if (horizontalInput > 0f)
             spriteRenderer.flipX = true;
@@ -90,16 +132,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        if (animator == null) return;
+        if (animator == null)
+            return;
 
-        bool isMoving = !Mathf.Approximately(horizontalInput, 0f);
+        bool isMoving =
+            !Mathf.Approximately(horizontalInput, 0f);
 
         animator.SetBool(IsMovingHash, isMoving);
     }
 
     private void UpdateFootstepAudio()
     {
-        bool isMoving = !Mathf.Approximately(horizontalInput, 0f);
+        bool isMoving =
+            !Mathf.Approximately(horizontalInput, 0f);
 
         if (isMoving && !isFootstepPlaying)
             StartFootstep();
@@ -109,7 +154,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartFootstep()
     {
-        if (footstepSFX == null) return;
+        if (footstepSFX == null || isFootstepPlaying)
+            return;
 
         Audio.PlaySFX2D(footstepSFX, loop: true);
         isFootstepPlaying = true;
@@ -117,9 +163,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopFootstep()
     {
-        if (!isFootstepPlaying) return;
+        if (!isFootstepPlaying)
+            return;
 
-        Audio.StopSFX(footstepSFX);
+        if (footstepSFX != null)
+            Audio.StopSFX(footstepSFX);
+
         isFootstepPlaying = false;
     }
 }

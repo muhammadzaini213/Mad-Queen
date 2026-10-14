@@ -1769,7 +1769,7 @@ MonoBehaviour:
   settingsButton: {fileID: 1655013092}
   aboutButton: {fileID: 852340415}
   exitButton: {fileID: 1491781946}
-  startScene: {fileID: 11400000, guid: 846fb1fb6a737b62a8f4b036651f4735, type: 2}
+  startScene: {fileID: 11400000, guid: a3f1095636bbfc0e4a6f3185453b3bb9, type: 2}
   settingsScene: {fileID: 11400000, guid: 8a5c4985bead532e9bbb9d691eb36b20, type: 2}
   aboutScene: {fileID: 11400000, guid: 535793a7c2e7fa60da954f4656ad920f, type: 2}
   savedSceneKey: LastScene
