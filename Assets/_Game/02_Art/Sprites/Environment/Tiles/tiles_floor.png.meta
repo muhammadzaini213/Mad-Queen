@@ -992,8 +992,8 @@ TextureImporter:
       name: tiles_floor_40
       rect:
         serializedVersion: 2
-        x: 48
-        y: 74
+        x: 128
+        y: 90
         width: 16
         height: 16
       alignment: 0
@@ -1014,7 +1014,7 @@ TextureImporter:
       name: tiles_floor_41
       rect:
         serializedVersion: 2
-        x: 64
+        x: 48
         y: 74
         width: 16
         height: 16
@@ -1042,7 +1042,7 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 8}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape:
@@ -1083,8 +1083,8 @@ TextureImporter:
       name: tiles_floor_44
       rect:
         serializedVersion: 2
-        x: 48
-        y: 58
+        x: 80
+        y: 90
         width: 16
         height: 16
       alignment: 0
@@ -1149,8 +1149,8 @@ TextureImporter:
       name: tiles_floor_47
       rect:
         serializedVersion: 2
-        x: 48
-        y: 42
+        x: 96
+        y: 90
         width: 16
         height: 16
       alignment: 0
@@ -1171,8 +1171,8 @@ TextureImporter:
       name: tiles_floor_48
       rect:
         serializedVersion: 2
-        x: 64
-        y: 42
+        x: 112
+        y: 90
         width: 16
         height: 16
       alignment: 0
@@ -1202,7 +1202,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1224,7 +1224,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
