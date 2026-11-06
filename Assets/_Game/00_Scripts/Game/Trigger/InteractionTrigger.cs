@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,19 +12,35 @@ public class InteractionTrigger : MonoBehaviour
     [Header("Face Player")]
     [SerializeField] private bool facePlayerOnInteract = false;
 
-    [SerializeField] private bool saveInitialRotation = true;
+    [Tooltip("Uncheck if the original sprite faces left.")]
+    [SerializeField] private bool spriteFacesRight = true;
+
+    [Tooltip("SpriteRenderer to flip.")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private bool used;
-    private Quaternion initialRotation;
 
     public string Clue => clue;
     public bool CanInteract => !singleUse || !used;
-
     public bool FacePlayerOnInteract => facePlayerOnInteract;
 
     private void Awake()
     {
-        initialRotation = transform.rotation;
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer == null)
+                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+
+        if (spriteRenderer == null)
+        {
+            Debug.LogWarning(
+                $"[{nameof(InteractionTrigger)}] SpriteRenderer not found on {name}.",
+                this
+            );
+        }
     }
 
     private void Reset()
@@ -54,32 +69,38 @@ public class InteractionTrigger : MonoBehaviour
         if (player == null)
         {
             Debug.LogWarning(
-                $"[{nameof(InteractionTrigger)}] Player dengan tag 'Player' tidak ditemukan.",
+                $"[{nameof(InteractionTrigger)}] Player with tag 'Player' not found.",
                 this
             );
             return;
         }
 
-        Vector2 direction = player.transform.position - transform.position;
+        FlipToward(player.transform);
+    }
 
-        if (direction.sqrMagnitude < 0.0001f)
+    public void FlipToward(Transform target)
+    {
+        if (target == null || spriteRenderer == null)
             return;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        FlipToward((Vector2)target.position);
     }
 
-
-    public void ReturnToInitialRotation()
+    public void FlipToward(Vector2 worldPosition)
     {
-        if (!saveInitialRotation) return;
+        if (spriteRenderer == null)
+            return;
 
-        transform.rotation = initialRotation;
-    }
+        float directionX =
+            worldPosition.x - spriteRenderer.transform.position.x;
 
-    public void SaveCurrentRotationAsInitial()
-    {
-        initialRotation = transform.rotation;
+        if (Mathf.Abs(directionX) < 0.0001f)
+            return;
+
+        bool targetIsRight = directionX > 0f;
+
+        spriteRenderer.flipX = spriteFacesRight
+            ? !targetIsRight
+            : targetIsRight;
     }
 }
