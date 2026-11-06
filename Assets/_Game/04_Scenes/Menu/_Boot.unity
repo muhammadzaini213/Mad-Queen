@@ -1173,8 +1173,8 @@ MonoBehaviour:
   progressBar: {fileID: 443397241}
   dotInterval: 0.4
   maxDots: 3
-  minDisplayTime: 2
-  maxDisplayTime: 4
+  minDisplayTime: 1
+  maxDisplayTime: 2
   fadeInDuration: 0.5
   fadeOutDuration: 0.5
   excludedScenes:
