@@ -5,83 +5,149 @@ using UnityEngine;
 public class CatWaitThenAction : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator catAnimator;
+    [SerializeField] private Animator potAnimator;
 
-    [Header("Animations")]
+    [Header("Cat Animations")]
+    [SerializeField] private AnimationClip catJoinPotAnimation;
+    [SerializeField] private AnimationClip catIdleAnimation;
+    [SerializeField] private AnimationClip catActionAnimation;
+
+    [Header("Pot Animations")]
     [SerializeField] private AnimationClip potIdleAnimation;
     [SerializeField] private AnimationClip breakPotAnimation;
+
+    [Header("Animation Speed")]
+    [SerializeField] private float catJoinSpeed = 1f;
+    [SerializeField] private float catIdleSpeed = 1f;
+    [SerializeField] private float catActionSpeed = 1f;
+
+    [SerializeField] private float potIdleSpeed = 1f;
+    [SerializeField] private float breakPotSpeed = 1f;
 
     [Header("Wait Settings")]
     [SerializeField] private float waitDuration = 2f;
 
     [Header("Options")]
-    [SerializeField] private bool playOnStart = true;
+    [SerializeField] private bool playJoinOnStart = true;
     [SerializeField] private bool useUnscaledTime = false;
 
-    private bool isPlaying;
+    private bool isJoinPlaying;
+    private bool isBreakPlaying;
 
-    public bool IsPlaying => isPlaying;
+    public bool IsJoinPlaying => isJoinPlaying;
+    public bool IsBreakPlaying => isBreakPlaying;
 
     private void Awake()
     {
-        if (animator == null)
-            animator = GetComponent<Animator>();
+        if (catAnimator == null)
+            catAnimator = GetComponent<Animator>();
     }
 
     private void Start()
     {
-        if (playOnStart)
-            PlaySequence();
+        if (playJoinOnStart)
+            PlayJoinPotSequence();
     }
 
-    public void PlaySequence()
-    {
-        if (isPlaying) return;
+    // ==========================================
+    // SEQUENCE 1: JOIN POT + IDLE
+    // ==========================================
 
-        if (animator == null ||
-            potIdleAnimation == null ||
-            breakPotAnimation == null)
+    public void PlayJoinPotSequence()
+    {
+        if (isJoinPlaying || isBreakPlaying) return;
+
+        if (catAnimator == null ||
+            potAnimator == null ||
+            catJoinPotAnimation == null ||
+            catIdleAnimation == null ||
+            potIdleAnimation == null)
         {
-            Debug.LogWarning(
-                "CatWaitThenAction: Animator atau Animation Clip belum dipasang.",
-                this
-            );
+            Debug.LogWarning("Join Pot Sequence: Missing references.", this);
             return;
         }
 
-        StartCoroutine(WaitThenAct());
+        StartCoroutine(JoinPotSequence());
     }
 
-    private IEnumerator WaitThenAct()
+    private IEnumerator JoinPotSequence()
     {
-        isPlaying = true;
+        isJoinPlaying = true;
 
-        animator.Play(potIdleAnimation.name, 0, 0f);
+        // 1. CAT JOIN POT
+        catAnimator.speed = catJoinSpeed;
+        catAnimator.Play(catJoinPotAnimation.name, 0, 0f);
 
-        float elapsed = 0f;
-
-        while (elapsed < waitDuration)
-        {
-            elapsed += useUnscaledTime
-                ? Time.unscaledDeltaTime
-                : Time.deltaTime;
-
-            yield return null;
-        }
-
-        animator.Play(breakPotAnimation.name, 0, 0f);
-
-        yield return null;
-
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-        while (stateInfo.IsName(breakPotAnimation.name) &&
-               stateInfo.normalizedTime < 1f)
+        while (true)
         {
             yield return null;
-            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            AnimatorStateInfo stateInfo =
+                catAnimator.GetCurrentAnimatorStateInfo(0);
+
+            if (stateInfo.IsName(catJoinPotAnimation.name) &&
+                stateInfo.normalizedTime >= 1f)
+                break;
         }
 
-        isPlaying = false;
+        // 2. CAT IDLE + POT IDLE
+        catAnimator.speed = catIdleSpeed;
+        potAnimator.speed = potIdleSpeed;
+
+        catAnimator.Play(catIdleAnimation.name, 0, 0f);
+        potAnimator.Play(potIdleAnimation.name, 0, 0f);
+
+        isJoinPlaying = false;
+    }
+
+    // ==========================================
+    // SEQUENCE 2: CAT ACTION + BREAK POT
+    // ==========================================
+
+    public void PlayBreakPotSequence()
+    {
+        if (isJoinPlaying || isBreakPlaying) return;
+
+        if (catAnimator == null ||
+            potAnimator == null ||
+            catActionAnimation == null ||
+            breakPotAnimation == null)
+        {
+            Debug.LogWarning("Break Pot Sequence: Missing references.", this);
+            return;
+        }
+
+        StartCoroutine(BreakPotSequence());
+    }
+
+    private IEnumerator BreakPotSequence()
+    {
+        isBreakPlaying = true;
+
+        // CAT ACTION + BREAK POT SIMULTANEOUSLY
+        catAnimator.speed = catActionSpeed;
+        potAnimator.speed = breakPotSpeed;
+
+        catAnimator.Play(catActionAnimation.name, 0, 0f);
+        potAnimator.Play(breakPotAnimation.name, 0, 0f);
+
+        // Wait until cat action finishes
+        while (true)
+        {
+            yield return null;
+
+            AnimatorStateInfo stateInfo =
+                catAnimator.GetCurrentAnimatorStateInfo(0);
+
+            if (stateInfo.IsName(catActionAnimation.name) &&
+                stateInfo.normalizedTime >= 1f)
+                break;
+        }
+
+        catAnimator.speed = 1f;
+        potAnimator.speed = 1f;
+
+        isBreakPlaying = false;
     }
 }

@@ -12,7 +12,7 @@ Batch build (from `Assets/Editor/BuildScript.cs`, static entry `BuildScript.Buil
 Unity -batchmode -quit -projectPath . -executeMethod BuildScript.Build -buildTarget StandaloneLinux64
 ```
 
-`-buildTarget` required; only `StandaloneWindows64`, `StandaloneLinux64`, `StandaloneOSX`, `WebGL` supported. Output: `build/<Target>/` (gitignored). Build reads enabled scenes from Build Settings, not a hardcoded list.
+`-buildTarget` required; only `StandaloneWindows64`, `StandaloneLinux64`, `StandaloneOSX`, `WebGL` supported (code throws on anything else). Output: `build/<Target>/<ProductName>.exe|.x86_64|.app` or `build/WebGL/` (gitignored via `build/`). Build reads enabled scenes from Build Settings (`EditorBuildSettings.scenes`), not a hardcoded list.
 
 ## Architecture — Slafurry standard
 
@@ -53,6 +53,6 @@ All gameplay code lives under `Assets/_Game/00_Scripts/`, namespaces prefixed `S
 ## Git gotchas
 
 - Dual VCS: git + Plastic SCM. `ignore.conf` = Plastic ignore; `.gitignore` = git. Keep both in sync when ignoring paths.
-- Gitignore excludes `*.csproj`, `*.sln`, `Library/`, `Temp/`, `Logs/`, `UserSettings/`, `build/`. `Mad-Queen.slnx`, `Packages/manifest.json`, `packages-lock.json` are tracked — commit lockfile changes with manifest changes.
-- `.meta` files: 789 tracked. Any new asset/folder needs its `.meta` committed. Never hand-edit GUIDs.
+- Gitignore excludes `*.csproj`, `*.sln`, `Library/`, `Temp/`, `Logs/`, `UserSettings/`, `build/`. `Mad-Queen.slnx` and `Packages/manifest.json` are tracked — commit lockfile/manifest changes together.
+- `.meta` files: tracked. Any new asset/folder needs its `.meta` committed alongside it. Never hand-edit GUIDs.
 - `.vscode/settings.json` hides `.meta`/`.asset`/`.prefab`/`.unity` in VS Code explorer (files still on disk). Use terminal/Unity for those.
