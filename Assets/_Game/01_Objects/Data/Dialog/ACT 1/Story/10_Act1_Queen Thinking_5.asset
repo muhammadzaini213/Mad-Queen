@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogBucket
   lines:
   - speakerName: Queen
-    text: "(\u201COh heavens,30 minutes have passed?! JUST. 30. MINUTES?! Please
+    text: "(\u201COh heavens, 30 minutes have passed?! JUST. 30. MINUTES?! Please
       tell me it\u2019s a really boring dream\u201D)"

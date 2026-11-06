@@ -1,9 +1,9 @@
+
 using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using Slafurry.Systems.Audio;
 
 public class DialogHUD : MonoBehaviour
@@ -30,12 +30,16 @@ public class DialogHUD : MonoBehaviour
     private DialogBucket bucket;
     private Action onFinished;
     private Coroutine typingRoutine;
+
     private int index;
     private bool isOpen;
     private bool isTyping;
     private bool isTypeSFXPlaying;
+
     private int startedFrame = -1;
     private int closedFrame = -1;
+
+    private bool occupyPlayer;
 
     private void Awake()
     {
@@ -64,14 +68,25 @@ public class DialogHUD : MonoBehaviour
             NextLine();
     }
 
-    public void Play(DialogBucket newBucket, Action finished = null)
+    public void Play(
+        DialogBucket newBucket,
+        bool occupyPlayer = true,
+        Action finished = null)
     {
         if (isOpen || newBucket == null || newBucket.Lines.Count == 0)
             return;
 
+        this.occupyPlayer = occupyPlayer;
+
+        if (occupyPlayer)
+            PlayerOccupied.Instance.Occupy();
+        else
+            PlayerOccupied.Instance.Vacate();
+
         bucket = newBucket;
         onFinished = finished;
         index = 0;
+
         isOpen = true;
         startedFrame = Time.frameCount;
 
@@ -168,6 +183,9 @@ public class DialogHUD : MonoBehaviour
         StopTypeSFX();
         PlaySFX(endSFX);
 
+        // Occupancy tidak diubah saat dialog selesai.
+        // Status player tetap mengikuti pengaturan saat dialog dimulai.
+
         callback?.Invoke();
     }
 
@@ -180,6 +198,7 @@ public class DialogHUD : MonoBehaviour
 
         if (AudioSystem.Instance == null)
             return;
+
         Audio.PlaySFX2D(typeSFX, loop: true);
         isTypeSFXPlaying = true;
     }
@@ -190,7 +209,11 @@ public class DialogHUD : MonoBehaviour
             return;
 
         if (AudioSystem.Instance == null)
+        {
+            isTypeSFXPlaying = false;
             return;
+        }
+
         Audio.StopSFX(typeSFX);
         isTypeSFXPlaying = false;
     }
@@ -199,8 +222,10 @@ public class DialogHUD : MonoBehaviour
     {
         if (sfx == null)
             return;
+
         if (AudioSystem.Instance == null)
             return;
+
         Audio.PlaySFX2D(sfx);
     }
 }
